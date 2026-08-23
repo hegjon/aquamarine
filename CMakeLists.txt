@@ -158,6 +158,16 @@ add_test(
   COMMAND output "output")
 add_dependencies(tests output)
 
+add_executable(gles2Fallback "tests/GLES2Fallback.cpp")
+target_include_directories(gles2Fallback PRIVATE "./src" "./src/include"
+                                                 "./src/backend/drm")
+target_link_libraries(gles2Fallback PRIVATE PkgConfig::deps aquamarine)
+add_test(
+  NAME "gles2Fallback"
+  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/tests
+  COMMAND gles2Fallback "gles2Fallback")
+add_dependencies(tests gles2Fallback)
+
 # Installation
 install(TARGETS aquamarine)
 install(DIRECTORY "include/aquamarine" DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
